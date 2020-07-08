@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from flask import Flask
-from flask_restplus import Api, Resource, fields
+from flask_restx import Api, Resource, fields
 from sklearn.externals import joblib
 from Msencillo import valores
 
@@ -42,4 +42,4 @@ class PhishingApi(Resource):
          "result": valores(args['Plot'])}, 200
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=8888)
+    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=5000)

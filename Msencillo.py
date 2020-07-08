@@ -3,6 +3,7 @@
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.multiclass import OneVsRestClassifier
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn.externals import joblib
 import sys
 import os
@@ -18,8 +19,12 @@ def valores(Plot):
 
     X_plott = vect.transform(PlotTest)
     y_pred = clf.predict_proba(X_plott)
+    
+    cols = ['p_Action', 'p_Adventure', 'p_Animation', 'p_Biography', 'p_Comedy', 'p_Crime', 'p_Documentary', 'p_Drama', 'p_Family','p_Fantasy', 'p_Film-Noir', 'p_History', 'p_Horror', 'p_Music', 'p_Musical', 'p_Mystery', 'p_News', 'p_Romance','p_Sci-Fi', 'p_Short', 'p_Sport', 'p_Thriller', 'p_War', 'p_Western']
+
+    res = pd.DataFrame(y_pred, columns=cols)
        
-    return y_pred
+    return res
 
 if __name__ == "__main__":
     
@@ -28,10 +33,10 @@ if __name__ == "__main__":
         
     else:
 
-        url = sys.argv[1]
+        Plot = sys.argv[1]
 
-        p1 = valores(Plot)
+        res = valores(Plot)
         
-        print(url)
-        print('Probabilidad de comprar: ', p1)
+        print(Plot)
+        print('Probabilidades de pertenecer a un genero: ', res)
         
